@@ -12,7 +12,7 @@
                 <div class="card-header">{{ __('プロフィール登録') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/profile/add') }}">
+                    <form method="POST" action="{{ url('/profile/create') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -22,7 +22,7 @@
                                 <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
 
                                 @error('tel')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" dusk="tel_error">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -36,7 +36,7 @@
                                 <input id="age" type="number" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age">
 
                                 @error('age')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" dusk="age_error">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -52,7 +52,7 @@
                                     <option value="1" @if (old('sex') == 1) selected @endif >男</option>
                                 </select>
                                 @error('sex')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" dusk="sex_error">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -63,9 +63,9 @@
                             <label for="introduction" class="col-md-4 col-form-label text-md-right" dusk="introduction">{{ __('自己紹介') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="introduction" rows="4" class="form-control @error('introduction') is-invalid @enderror" ></textarea>
+                                <textarea name="introduction" rows="4" class="form-control @error('introduction') is-invalid @enderror" >{{ old('introduction') }}</textarea>
                                 @error('introduction')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" dusk="introduction_error">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
