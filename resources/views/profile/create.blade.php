@@ -48,8 +48,8 @@
 
                             <div class="col-md-6">
                                 <select name="sex" class="form-control @error('sex') is-invalid @enderror">
-                                    <option value="0" @if (old('sex') == 0) selected @endif >女</option>
-                                    <option value="1" @if (old('sex') == 1) selected @endif >男</option>
+                                    <option value="1" @if (old('sex') == 1) selected @endif >女</option>
+                                    <option value="2" @if (old('sex') == 2) selected @endif >男</option>
                                 </select>
                                 @error('sex')
                                     <span class="invalid-feedback" role="alert" dusk="sex_error">

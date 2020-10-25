@@ -32,7 +32,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['tel' => 'The tel field is required.']);
+        $response->assertSessionHasErrors(['tel' => '電話番号は必須です']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -41,7 +41,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['tel' => 'The tel must be between 8 and 11 digits.']);
+        $response->assertSessionHasErrors(['tel' => '電話番号は8桁から11桁の間で入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -50,7 +50,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['tel' => 'The tel must be between 8 and 11 digits.']);
+        $response->assertSessionHasErrors(['tel' => '電話番号は8桁から11桁の間で入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -59,7 +59,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['tel' => 'The tel must be a number.']);
+        $response->assertSessionHasErrors(['tel' => '電話番号は数字を入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
     }
@@ -76,7 +76,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['age' => 'The age field is required.']);
+        $response->assertSessionHasErrors(['age' => '年齢は必須です']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -85,7 +85,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['age' => 'The age must be at least 20.']);
+        $response->assertSessionHasErrors(['age' => '年齢は20以上で入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -94,7 +94,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['age' => 'The age may not be greater than 80.']);
+        $response->assertSessionHasErrors(['age' => '年齢は80以下で入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
 
@@ -103,7 +103,7 @@ class ProfileControllerTest extends TestCase
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['age' => 'The age must be a number.']);
+        $response->assertSessionHasErrors(['age' => '年齢は数字を入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
     }
@@ -113,13 +113,50 @@ class ProfileControllerTest extends TestCase
      *
      * @return void
      */
-    public function testPostProfileCreatePathWithoutSex_failed()
+    public function testPostProfileCreatePathSex_failed()
     {
+        // 必須チェック
         $data = [];
         $response = $this->from('/profile/create')
             ->post('/profile/create', $data);
 
-        $response->assertSessionHasErrors(['sex' => 'The sex field is required.']);
+        $response->assertSessionHasErrors(['sex' => '性別は必須です']);
+        $response->assertStatus(302)
+            ->assertRedirect('/profile/create');
+
+        // 範囲チェック
+        $data = ['sex' => 3];
+        $response = $this->from('/profile/create')
+            ->post('/profile/create', $data);
+
+        $response->assertSessionHasErrors(['sex' => '正しい性別を入力してください']);
+        $response->assertStatus(302)
+            ->assertRedirect('/profile/create');
+    }
+
+
+    /**
+     * post profile create validation introduction
+     *
+     * @return void
+     */
+    public function testPostProfileCreatePathIntroduction_failed()
+    {
+        // 必須チェック
+        $data = [];
+        $response = $this->from('/profile/create')
+            ->post('/profile/create', $data);
+
+        $response->assertSessionHasErrors(['introduction' => '自己紹介は必須です']);
+        $response->assertStatus(302)
+            ->assertRedirect('/profile/create');
+
+        // 上限チェック
+        $data = ['introduction' => str_random(256)];
+        $response = $this->from('/profile/create')
+            ->post('/profile/create', $data);
+
+        $response->assertSessionHasErrors(['introduction' => '自己紹介は255文字以下で入力してください']);
         $response->assertStatus(302)
             ->assertRedirect('/profile/create');
     }
