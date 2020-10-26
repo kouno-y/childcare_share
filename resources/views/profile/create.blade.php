@@ -63,7 +63,7 @@
                             <label for="introduction" class="col-md-4 col-form-label text-md-right" dusk="introduction">{{ __('自己紹介') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="introduction" rows="4" class="form-control @error('introduction') is-invalid @enderror" >{{ old('introduction') }}</textarea>
+                                <textarea name="introduction" rows="4" class="form-control @error('introduction') is-invalid @enderror" required>{{ old('introduction') }}</textarea>
                                 @error('introduction')
                                     <span class="invalid-feedback" role="alert" dusk="introduction_error">
                                         <strong>{{ $message }}</strong>
