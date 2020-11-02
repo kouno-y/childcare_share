@@ -2,7 +2,7 @@
 
 namespace Tests\Browser;
 
-use App\User;
+use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -68,8 +68,8 @@ class ProfileCreateTest extends DuskTestCase
     }
 
     /**
+     * introduction validation
      * sex validation
-     *
      * @return void
      */
     public function testIntroductionValidation()
