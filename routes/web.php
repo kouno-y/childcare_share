@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile/create', 'ProfileController@create');
-Route::post('/profile/create', 'ProfileController@register');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/profile/create', 'ProfileController@create');
+    Route::post('/profile/create', 'ProfileController@register');
+});

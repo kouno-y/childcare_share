@@ -29,7 +29,7 @@ class ProfileTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/profile/create', $data);
 
-        $response->assertStatus(200)
-            ->assertDatabaseHas('profiles', $data);
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('profiles', $data);
     }
 }
